@@ -51,10 +51,11 @@ class BinanceClient:
             "X-MBX-APIKEY": self.api_key,
             "Content-Type": "application/x-www-form-urlencoded",
         })
+        self._time_offset = self._get_server_time_offset()
 
     def _timestamp(self) -> int:
         #Current time in milliseconds
-        return int(time.time() * 1000)
+        return int(time.time() * 1000) + self._time_offset
 
     def _sign(self, params: dict[str, Any]) -> str:
         """
@@ -164,4 +165,19 @@ class BinanceClient:
                 logger.debug("Exchange info found for %s", symbol)
                 return item
 
-        raise BinanceAPIError(code=-1121,message=f"Symbol '{symbol}' not found on Binance Futures testnet.",)
+        raise BinanceAPIError(code=-1121,message=f"Symbol '{symbol}' not found on Binance Futures testnet.")
+    
+    def _get_server_time_offset(self) -> int:
+        # Fetch Binance server time and return the offset vs local clock in ms.
+        url = f"{BASE_URL}/fapi/v1/time"
+        try:
+            response = self.session.get(url, timeout=5)
+            data = response.json()
+            server_time = data["serverTime"]
+            local_time  = int(time.time() * 1000)
+            offset = server_time - local_time
+            logger.debug("Server time offset: %dms", offset)
+            return offset
+        except Exception as e:
+            logger.warning("Could not fetch server time, using offset=0: %s", e)
+            return 0
