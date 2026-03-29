@@ -9,28 +9,8 @@ logger = get_logger("orders")
 
 ORDER_ENDPOINT = "/fapi/v1/order"
 
-
-# ------------------------------------------------------------------
-# Response normaliser
-# ------------------------------------------------------------------
-
 def _parse_response(raw: dict[str, Any]) -> dict[str, Any]:
-    """
-    Normalise a Binance order response into a clean dict
-    with only the fields we care about.
 
-    Raw Binance fields we map:
-        orderId       → order_id
-        status        → status         (NEW, FILLED, PARTIALLY_FILLED, CANCELED)
-        executedQty   → executed_qty
-        avgPrice      → avg_price      (0 if not yet filled)
-        origQty       → orig_qty
-        price         → price          (limit price; "0" for market)
-        side          → side
-        type          → order_type
-        symbol        → symbol
-        updateTime    → updated_at
-    """
     avg_price = raw.get("avgPrice", "0")
 
     return {
@@ -46,18 +26,7 @@ def _parse_response(raw: dict[str, Any]) -> dict[str, Any]:
         "updated_at":  raw.get("updateTime"),
     }
 
-
-# ------------------------------------------------------------------
-# Order builders
-# Each returns the raw params dict to POST to Binance.
-# Kept separate so they are testable in isolation.
-# ------------------------------------------------------------------
-
-def _build_market_order(
-    symbol: str,
-    side: str,
-    quantity: str,
-) -> dict[str, Any]:
+def _build_market_order(symbol: str,side: str,quantity: str) -> dict[str, Any]:
     return {
         "symbol":   symbol,
         "side":     side,
@@ -66,13 +35,7 @@ def _build_market_order(
     }
 
 
-def _build_limit_order(
-    symbol: str,
-    side: str,
-    quantity: str,
-    price: str,
-    time_in_force: str = "GTC",
-) -> dict[str, Any]:
+def _build_limit_order(symbol: str,side: str,quantity: str,price: str,time_in_force: str = "GTC") -> dict[str, Any]:
     return {
         "symbol":      symbol,
         "side":        side,
@@ -83,19 +46,8 @@ def _build_limit_order(
     }
 
 
-def _build_stop_market_order(
-    symbol: str,
-    side: str,
-    quantity: str,
-    stop_price: str,
-) -> dict[str, Any]:
-    """
-    STOP_MARKET: triggers a market order when price hits stop_price.
-
-    Use case:
-    - SELL stop: protect a long position (stop-loss)
-    - BUY  stop: enter on breakout above a level
-    """
+def _build_stop_market_order(symbol: str,side: str,quantity: str,stop_price: str,) -> dict[str, Any]:
+    # STOP_MARKET: triggers a market order when price hits stop_price.
     return {
         "symbol":    symbol,
         "side":      side,
@@ -104,10 +56,6 @@ def _build_stop_market_order(
         "stopPrice": stop_price,
     }
 
-
-# ------------------------------------------------------------------
-# Public order placement functions
-# ------------------------------------------------------------------
 
 def place_order(
     client: BinanceClient,
@@ -119,19 +67,8 @@ def place_order(
     stop_price: str | None = None,
     time_in_force: str = "GTC",
 ) -> dict[str, Any]:
-    """
-    Validate, build, and place an order.
+    # Validate, build, and place an order
 
-    This is the single entry point for all order types.
-    The CLI calls this — it never touches the client directly.
-
-    Returns a normalised order result dict.
-    Raises ValueError on validation failure.
-    Raises BinanceAPIError on API rejection.
-    Raises BinanceNetworkError on connectivity issues.
-    """
-
-    # ---- 1. Validate ------------------------------------------------
     order_input = {
         "symbol":     symbol.upper(),
         "side":       side.upper(),
@@ -141,7 +78,7 @@ def place_order(
         "stop_price": stop_price,
     }
 
-    errors = validate_order(order_input)
+    errors = validate_order(order_input,client)
     if errors:
         # Join all errors into one readable message
         raise ValueError("Validation failed:\n" + "\n".join(f"  • {e}" for e in errors))
@@ -150,7 +87,6 @@ def place_order(
     sd   = side.upper()
     otype = order_type.upper()
 
-    # ---- 2. Build params --------------------------------------------
     if otype == "MARKET":
         params = _build_market_order(sym, sd, quantity)
 
@@ -167,13 +103,12 @@ def place_order(
     else:
         raise ValueError(f"Unsupported order type: {order_type}")
 
-    # ---- 3. Log the request summary ---------------------------------
+    # Log the request summary 
     logger.info(
         "Placing order | %s %s %s | qty=%s | price=%s | stop=%s",
         sd, otype, sym, quantity, price or "N/A", stop_price or "N/A",
     )
 
-    # ---- 4. Send to Binance -----------------------------------------
     try:
         raw_response = client.post(ORDER_ENDPOINT, params)
     except BinanceAPIError as e:
@@ -183,7 +118,6 @@ def place_order(
         logger.error("Network failure during order placement: %s", e)
         raise
 
-    # ---- 5. Normalise and return ------------------------------------
     result = _parse_response(raw_response)
 
     logger.info(
@@ -197,16 +131,7 @@ def place_order(
     return result
 
 
-# ------------------------------------------------------------------
-# Convenience wrappers — used directly by the CLI for clarity
-# ------------------------------------------------------------------
-
-def place_market_order(
-    client: BinanceClient,
-    symbol: str,
-    side: str,
-    quantity: str,
-) -> dict[str, Any]:
+def place_market_order(client: BinanceClient,symbol: str,side: str,quantity: str) -> dict[str, Any]:
     return place_order(
         client=client,
         symbol=symbol,
@@ -216,14 +141,7 @@ def place_market_order(
     )
 
 
-def place_limit_order(
-    client: BinanceClient,
-    symbol: str,
-    side: str,
-    quantity: str,
-    price: str,
-    time_in_force: str = "GTC",
-) -> dict[str, Any]:
+def place_limit_order(client: BinanceClient,symbol: str,side: str,quantity: str,price: str,time_in_force: str = "GTC",) -> dict[str, Any]:
     return place_order(
         client=client,
         symbol=symbol,
@@ -235,13 +153,7 @@ def place_limit_order(
     )
 
 
-def place_stop_market_order(
-    client: BinanceClient,
-    symbol: str,
-    side: str,
-    quantity: str,
-    stop_price: str,
-) -> dict[str, Any]:
+def place_stop_market_order(client: BinanceClient,symbol: str,side: str,quantity: str,stop_price: str,) -> dict[str, Any]:
     return place_order(
         client=client,
         symbol=symbol,
