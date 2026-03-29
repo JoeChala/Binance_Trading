@@ -142,3 +142,26 @@ class BinanceClient:
             raise BinanceNetworkError(f"Unexpected network error: {e}")
 
         return self._handle_response(response)
+    
+    def get_exchange_info(self, symbol: str) -> dict[str, Any]:
+        # Fetch trading rules for a specific symbol from Binance
+        url = f"{BASE_URL}/fapi/v1/exchangeInfo"
+
+        logger.info("Fetching exchange info for symbol: %s", symbol)
+
+        try:
+            response = self.session.get(url, timeout=10)
+        except requests.exceptions.Timeout:
+            raise BinanceNetworkError("Timed out fetching exchange info.")
+        except requests.exceptions.ConnectionError as e:
+            raise BinanceNetworkError(f"Connection error fetching exchange info: {e}")
+
+        data = self._handle_response(response)
+
+        # exchangeInfo returns ALL symbols
+        for item in data.get("symbols", []):
+            if item["symbol"] == symbol.upper():
+                logger.debug("Exchange info found for %s", symbol)
+                return item
+
+        raise BinanceAPIError(code=-1121,message=f"Symbol '{symbol}' not found on Binance Futures testnet.",)
