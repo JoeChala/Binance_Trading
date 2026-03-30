@@ -14,16 +14,8 @@ constraints_cache: dict[str, dict[str, Decimal]] = {}
 
 
 def get_symbol_constraints(symbol: str,client: BinanceClient) -> dict[str, Decimal]:
-    """
-    Fetch and parse LOT_SIZE, PRICE_FILTER, and MIN_NOTIONAL filters for a symbol from Binance exchange info.
-
-    Results are cached to improve speed
-
-    Returns a dict with keys:
-        step_size, min_qty, max_qty,
-        tick_size, min_price, max_price,
-        min_notional
-    """
+    # Fetch and parse LOT_SIZE, PRICE_FILTER, and MIN_NOTIONAL filters for a symbol from Binance exchange info.
+    
     sym = symbol.upper()
 
     if sym in constraints_cache:
@@ -157,12 +149,16 @@ def validate_price(price: str,symbol: str,client: BinanceClient):
     return str(p), None
 
 
-def validate_stop_price(stop_price: str,price: str,side: str,symbol: str,client: BinanceClient):
+def validate_stop_price(stop_price: str, price: str | None, side: str, symbol: str, client: BinanceClient):
     # Validate stop price for STOP_MARKET orders.
 
     cleaned, err = validate_price(stop_price, symbol, client)
     if err:
         return cleaned, err
+
+    if not price:
+        logger.debug("No reference price provided — skipping stop price direction check")
+        return cleaned, None
 
     try:
         sp = Decimal(cleaned)
@@ -231,7 +227,7 @@ def validate_order(order: dict[str, Any],client: BinanceClient) -> list[str]:
             errors.append("stop_price is required for STOP_MARKET orders.")
         else:
             try:
-                ref = price or "0"
+                ref = price if price and Decimal(str(price)) > 0 else None
                 _, err = validate_stop_price(stop_price, ref, side, sym_cleaned, client)
                 if err:
                     errors.append(err)
