@@ -252,6 +252,7 @@ requests
 python-dotenv
 typer
 rich
+click
 ```
 
 ---
