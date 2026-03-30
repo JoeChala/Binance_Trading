@@ -12,6 +12,10 @@ def get_logger(name: str) -> logging.Logger:
     Format : YYYY-MM-DD HH:MM:SS | LEVEL | LOGGER_NAME | MESSAGE
     """
     logger: logging.Logger = logging.getLogger(name=name)
+    logger.setLevel(logging.DEBUG)  
+    
+    if logger.handlers:
+        return logger  # already configured, don't add handlers again
 
     formatter = logging.Formatter(
         fmt="%(asctime)s | %(levelname)-8s | %(name)-20s | %(message)s",

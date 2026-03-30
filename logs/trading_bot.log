@@ -1,2 +1,134 @@
-2026-03-29 23:25:45 | ERROR    | orders               | API rejected order: code=-1021 msg=Timestamp for this request is outside of the recvWindow.
-2026-03-29 23:25:45 | ERROR    | cli                  | Interactive order rejected: code=-1021 msg=Timestamp for this request is outside of the recvWindow.
+2026-03-29 19:53:22 | ERROR    | cli                  | Order rejected: code=-4164 msg=Order's notional must be no smaller than 100 (unless you choose reduce only).
+2026-03-29 19:59:44 | DEBUG    | client               | Server time offset: 50294ms
+2026-03-29 19:59:44 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 19:59:44 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 19:59:45 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862145318,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 19:59:45 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 19:59:45 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 19:59:45 | DEBUG    | validators           | Quantity validated: 0.005
+2026-03-29 19:59:45 | DEBUG    | validators           | Order validation passed: BUY MARKET BTCUSDT qty=0.005
+2026-03-29 19:59:45 | INFO     | cli                  | CLI placing order: BUY MARKET BTCUSDT qty=0.005 price=None stop=None
+2026-03-29 19:59:45 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 19:59:45 | DEBUG    | validators           | Quantity validated: 0.005
+2026-03-29 19:59:45 | DEBUG    | validators           | Order validation passed: BUY MARKET BTCUSDT qty=0.005
+2026-03-29 19:59:45 | INFO     | orders               | Placing order | BUY MARKET BTCUSDT | qty=0.005 | price=N/A | stop=N/A
+2026-03-29 19:59:45 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': '0.005'}
+2026-03-29 19:59:45 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'MARKET', 'quantity': '0.005', 'timestamp': 1774881035683, 'signature': 'bcbdeb293380e0f814726db283129fea00a5b79c8e52b5484203ee65e488c129'}
+2026-03-29 19:59:45 | DEBUG    | client               | Response | status=200 | body={"orderId":12911600004,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"UWxobhWfj9u0VM8qsE9Uk3","price":"0.00","avgPrice":"0.00","origQty":"0.0050","executedQty":"0.0000","cumQty":"0.0000","cumQuote":"0.000000","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"updat
+2026-03-29 19:59:45 | INFO     | orders               | Order placed | id=12911600004 | status=NEW | executed=0.0000 @ 0.00
+2026-03-29 20:00:19 | DEBUG    | client               | Server time offset: 50285ms
+2026-03-29 20:00:19 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:00:19 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:00:20 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862659907,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:00:20 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:00:20 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:00:20 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:20 | DEBUG    | validators           | Order validation passed: SELL MARKET BTCUSDT qty=0.002
+2026-03-29 20:00:20 | INFO     | cli                  | CLI placing order: SELL MARKET BTCUSDT qty=0.002 price=None stop=None
+2026-03-29 20:00:20 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:20 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:20 | DEBUG    | validators           | Order validation passed: SELL MARKET BTCUSDT qty=0.002
+2026-03-29 20:00:20 | INFO     | orders               | Placing order | SELL MARKET BTCUSDT | qty=0.002 | price=N/A | stop=N/A
+2026-03-29 20:00:20 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'MARKET', 'quantity': '0.002'}
+2026-03-29 20:00:20 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'MARKET', 'quantity': '0.002', 'timestamp': 1774881070386, 'signature': '465f4ad4986b77c2ab2c76ea43f79e4e5f1194572becbdc9b5a9ad5e8a5224bf'}
+2026-03-29 20:00:20 | DEBUG    | client               | Response | status=200 | body={"orderId":12911601144,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"IuwRinCkkhsdarIwgruoLI","price":"0.00","avgPrice":"0.00","origQty":"0.0020","executedQty":"0.0000","cumQty":"0.0000","cumQuote":"0.000000","timeInForce":"GTC","type":"MARKET","reduceOnly":false,"closePosition":false,"side":"SELL","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"MARKET","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"upda
+2026-03-29 20:00:20 | INFO     | orders               | Order placed | id=12911601144 | status=NEW | executed=0.0000 @ 0.00
+2026-03-29 20:00:35 | DEBUG    | client               | Server time offset: 50208ms
+2026-03-29 20:00:35 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:00:35 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:00:35 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862145318,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:00:35 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:00:35 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:00:35 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:35 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:35 | DEBUG    | validators           | Price validated: 80000.0
+2026-03-29 20:00:35 | DEBUG    | validators           | Order validation passed: BUY LIMIT BTCUSDT qty=0.002
+2026-03-29 20:00:38 | INFO     | cli                  | CLI placing order: BUY LIMIT BTCUSDT qty=0.002 price=80000.0 stop=None
+2026-03-29 20:00:38 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:38 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:38 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:38 | DEBUG    | validators           | Price validated: 80000.0
+2026-03-29 20:00:38 | DEBUG    | validators           | Order validation passed: BUY LIMIT BTCUSDT qty=0.002
+2026-03-29 20:00:38 | INFO     | orders               | Placing order | BUY LIMIT BTCUSDT | qty=0.002 | price=80000.0 | stop=N/A
+2026-03-29 20:00:38 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'LIMIT', 'quantity': '0.002', 'price': '80000.0', 'timeInForce': 'GTC'}
+2026-03-29 20:00:38 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'LIMIT', 'quantity': '0.002', 'price': '80000.0', 'timeInForce': 'GTC', 'timestamp': 1774881088420, 'signature': '98e354cefaeb948e57c5a9bce8c4b1f68de80ce8e3fefd76592bac357795dc53'}
+2026-03-29 20:00:38 | DEBUG    | client               | Response | status=400 | body={"code":-4016,"msg":"Limit price can't be higher than 70710.89."}
+2026-03-29 20:00:38 | ERROR    | orders               | API rejected order: code=-4016 msg=Limit price can't be higher than 70710.89.
+2026-03-29 20:00:38 | ERROR    | cli                  | Order rejected: code=-4016 msg=Limit price can't be higher than 70710.89.
+2026-03-29 20:00:50 | DEBUG    | client               | Server time offset: 50291ms
+2026-03-29 20:00:50 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:00:50 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:00:50 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862145318,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:00:50 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:00:51 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:00:51 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:51 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:51 | DEBUG    | validators           | Price validated: 67000.0
+2026-03-29 20:00:51 | DEBUG    | validators           | Order validation passed: BUY LIMIT BTCUSDT qty=0.002
+2026-03-29 20:00:52 | INFO     | cli                  | CLI placing order: BUY LIMIT BTCUSDT qty=0.002 price=67000.0 stop=None
+2026-03-29 20:00:52 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:52 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:00:52 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:00:52 | DEBUG    | validators           | Price validated: 67000.0
+2026-03-29 20:00:52 | DEBUG    | validators           | Order validation passed: BUY LIMIT BTCUSDT qty=0.002
+2026-03-29 20:00:52 | INFO     | orders               | Placing order | BUY LIMIT BTCUSDT | qty=0.002 | price=67000.0 | stop=N/A
+2026-03-29 20:00:52 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'LIMIT', 'quantity': '0.002', 'price': '67000.0', 'timeInForce': 'GTC'}
+2026-03-29 20:00:52 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'BUY', 'type': 'LIMIT', 'quantity': '0.002', 'price': '67000.0', 'timeInForce': 'GTC', 'timestamp': 1774881102524, 'signature': '8ddacdd6ac2b2c129d7513d6c500ab2811afdb905de5255b70e76dc51ae05920'}
+2026-03-29 20:00:52 | DEBUG    | client               | Response | status=200 | body={"orderId":12911602207,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"sni6wST0EmN9PLNu8Wmd7y","price":"67000.00","avgPrice":"0.00","origQty":"0.0020","executedQty":"0.0000","cumQty":"0.0000","cumQuote":"0.000000","timeInForce":"GTC","type":"LIMIT","reduceOnly":false,"closePosition":false,"side":"BUY","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"LIMIT","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"upd
+2026-03-29 20:00:52 | INFO     | orders               | Order placed | id=12911602207 | status=NEW | executed=0.0000 @ 0.00
+2026-03-29 20:01:03 | DEBUG    | client               | Server time offset: 50291ms
+2026-03-29 20:01:03 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:01:03 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:01:03 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862659907,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:01:03 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:01:03 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:01:03 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:01:03 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:01:03 | DEBUG    | validators           | Price validated: 90000.0
+2026-03-29 20:01:03 | DEBUG    | validators           | Order validation passed: SELL LIMIT BTCUSDT qty=0.002
+2026-03-29 20:01:05 | INFO     | cli                  | CLI placing order: SELL LIMIT BTCUSDT qty=0.002 price=90000.0 stop=None
+2026-03-29 20:01:05 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:01:05 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:01:05 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:01:05 | DEBUG    | validators           | Price validated: 90000.0
+2026-03-29 20:01:05 | DEBUG    | validators           | Order validation passed: SELL LIMIT BTCUSDT qty=0.002
+2026-03-29 20:01:05 | INFO     | orders               | Placing order | SELL LIMIT BTCUSDT | qty=0.002 | price=90000.0 | stop=N/A
+2026-03-29 20:01:05 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': '0.002', 'price': '90000.0', 'timeInForce': 'GTC'}
+2026-03-29 20:01:05 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'LIMIT', 'quantity': '0.002', 'price': '90000.0', 'timeInForce': 'GTC', 'timestamp': 1774881116008, 'signature': '885e3740fa947b1b37a1f4f06d8e520ad8163a41242c1218af23b0d26a804f53'}
+2026-03-29 20:01:05 | DEBUG    | client               | Response | status=200 | body={"orderId":12911602436,"symbol":"BTCUSDT","status":"NEW","clientOrderId":"mnnOSp2wdz9hw5StAxc402","price":"90000.00","avgPrice":"0.00","origQty":"0.0020","executedQty":"0.0000","cumQty":"0.0000","cumQuote":"0.000000","timeInForce":"GTC","type":"LIMIT","reduceOnly":false,"closePosition":false,"side":"SELL","positionSide":"BOTH","stopPrice":"0.00","workingType":"CONTRACT_PRICE","priceProtect":false,"origType":"LIMIT","priceMatch":"NONE","selfTradePreventionMode":"EXPIRE_MAKER","goodTillDate":0,"up
+2026-03-29 20:01:05 | INFO     | orders               | Order placed | id=12911602436 | status=NEW | executed=0.0000 @ 0.00
+2026-03-29 20:01:20 | DEBUG    | client               | Server time offset: 50231ms
+2026-03-29 20:01:20 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:01:20 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:01:20 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862659907,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:01:20 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:01:20 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:01:20 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:01:20 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:01:20 | DEBUG    | validators           | Price validated: 80000.0
+2026-03-29 20:01:20 | WARNING  | validators           | Order validation failed: ['For a SELL STOP_MARKET, stop price (80000.0) must be below the reference price (0).']
+2026-03-29 20:01:20 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:04:20 | DEBUG    | client               | Server time offset: 50269ms
+2026-03-29 20:04:20 | INFO     | validators           | Fetching live constraints for BTCUSDT from Binance
+2026-03-29 20:04:20 | INFO     | client               | Fetching exchange info for symbol: BTCUSDT
+2026-03-29 20:04:20 | DEBUG    | client               | Response | status=200 | body={"timezone":"UTC","serverTime":1774862145318,"futuresType":"U_MARGINED","rateLimits":[{"rateLimitType":"REQUEST_WEIGHT","interval":"MINUTE","intervalNum":1,"limit":6000},{"rateLimitType":"ORDERS","interval":"MINUTE","intervalNum":1,"limit":1200},{"rateLimitType":"ORDERS","interval":"SECOND","intervalNum":10,"limit":290}],"exchangeFilters":[],"assets":[{"asset":"USDT","marginAvailable":true,"autoAssetExchange":"-100"},{"asset":"BTC","marginAvailable":true,"autoAssetExchange":"-0.00100000"},{"asse
+2026-03-29 20:04:20 | DEBUG    | client               | Exchange info found for BTCUSDT
+2026-03-29 20:04:20 | DEBUG    | validators           | Constraints for BTCUSDT: {'tick_size': Decimal('0.10'), 'min_price': Decimal('261.10'), 'max_price': Decimal('809484'), 'step_size': Decimal('0.0001'), 'min_qty': Decimal('0.0001'), 'max_qty': Decimal('1000'), 'min_notional': Decimal('100')}
+2026-03-29 20:04:20 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:04:20 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:04:20 | DEBUG    | validators           | Price validated: 80000.0
+2026-03-29 20:04:20 | DEBUG    | validators           | No reference price provided — skipping stop price direction check
+2026-03-29 20:04:20 | DEBUG    | validators           | Order validation passed: SELL STOP_MARKET BTCUSDT qty=0.002
+2026-03-29 20:04:22 | INFO     | cli                  | CLI placing order: SELL STOP_MARKET BTCUSDT qty=0.002 price=None stop=80000.0
+2026-03-29 20:04:22 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:04:22 | DEBUG    | validators           | Quantity validated: 0.002
+2026-03-29 20:04:22 | DEBUG    | validators           | Using cached constraints for BTCUSDT
+2026-03-29 20:04:22 | DEBUG    | validators           | Price validated: 80000.0
+2026-03-29 20:04:22 | DEBUG    | validators           | No reference price provided — skipping stop price direction check
+2026-03-29 20:04:22 | DEBUG    | validators           | Order validation passed: SELL STOP_MARKET BTCUSDT qty=0.002
+2026-03-29 20:04:22 | INFO     | orders               | Placing order | SELL STOP_MARKET BTCUSDT | qty=0.002 | price=N/A | stop=80000.0
+2026-03-29 20:04:22 | INFO     | client               | POST /fapi/v1/order | params={'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'STOP_MARKET', 'quantity': '0.002', 'stopPrice': '80000.0'}
+2026-03-29 20:04:22 | DEBUG    | client               | Full signed params: {'symbol': 'BTCUSDT', 'side': 'SELL', 'type': 'STOP_MARKET', 'quantity': '0.002', 'stopPrice': '80000.0', 'timestamp': 1774881312899, 'signature': 'ac04007744d5df1233802fc6de60a7e502911ca8919dce1340474ec878743912'}
+2026-03-29 20:04:23 | DEBUG    | client               | Response | status=400 | body={"code":-4120,"msg":"Order type not supported for this endpoint. Please use the Algo Order API endpoints instead."}
+2026-03-29 20:04:23 | ERROR    | orders               | API rejected order: code=-4120 msg=Order type not supported for this endpoint. Please use the Algo Order API endpoints instead.
+2026-03-29 20:04:23 | ERROR    | cli                  | Order rejected: code=-4120 msg=Order type not supported for this endpoint. Please use the Algo Order API endpoints instead.

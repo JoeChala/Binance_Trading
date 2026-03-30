@@ -13,7 +13,7 @@ from bot.validators import validate_order, get_symbol_constraints
 from bot.logging_config import get_logger
 
 
-app = typer.Typer(name="trading-bot",help="Binance Futures Testnet trading bot.",add_completion=False,pretty_exceptions_enable=False)
+app = typer.Typer(name="trading-bot",help="Binance Futures Testnet trading bot",add_completion=False,pretty_exceptions_enable=False)
 
 console = Console()
 logger  = get_logger("cli")
@@ -154,7 +154,7 @@ def prompt_side() -> str:
 @app.command("place")
 def place_command(
     symbol: str = typer.Option(
-        ..., "--symbol", "-s",
+        ..., "--symbol","-s",
         help="Trading pair, e.g. BTCUSDT",
         prompt="Symbol (e.g. BTCUSDT)",
     ),
@@ -164,17 +164,17 @@ def place_command(
         prompt="Side (BUY/SELL)",
     ),
     order_type: str = typer.Option(
-        ..., "--type", "-t",
+        ..., "--type","-t",
         help="MARKET, LIMIT, or STOP_MARKET",
         prompt="Order type (MARKET/LIMIT/STOP_MARKET)",
     ),
     quantity: str = typer.Option(
-        ..., "--quantity", "-q",
+        ...,"--quantity","-q",
         help="Quantity in base asset units (e.g. 0.001 for BTC)",
         prompt="Quantity",
     ),
     price: Optional[str] = typer.Option(
-        None, "--price", "-p",
+        None, "--price","-p",
         help="Limit price (required for LIMIT orders)",
     ),
     stop_price: Optional[str] = typer.Option(
@@ -186,7 +186,7 @@ def place_command(
         help="Time in force: GTC, IOC, FOK (LIMIT orders only)",
     ),
     yes: bool = typer.Option(
-        False, "--yes", "-y",
+        False,"--yes","-y",
         help="Skip confirmation prompt",
     ),
 ) -> None:
